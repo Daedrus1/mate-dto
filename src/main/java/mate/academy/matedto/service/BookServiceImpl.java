@@ -13,10 +13,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
-    private BookRepository repository;
-    private BookMapper bookMapper;
+    private final BookRepository repository;
+    private final BookMapper bookMapper;
 
     @Override
     public List<BookDto> getAll() {
@@ -28,14 +28,13 @@ public class BookServiceImpl implements BookService{
     @Override
     public BookDto getById(Long id) {
         Book book = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found !"));
+                .orElseThrow(() -> new EntityNotFoundException("Book not found: " + id));
         return bookMapper.toDto(book);
     }
 
     @Override
     public BookDto create(CreateBookRequestDto dto) {
         Book book = bookMapper.toModel(dto);
-        book = repository.save(book);
-        return bookMapper.toDto(book);
+        return bookMapper.toDto(repository.save(book));
     }
 }
