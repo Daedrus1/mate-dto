@@ -123,11 +123,10 @@
                         <sourceDirectory>src/main/resources</sourceDirectory>
                         <sourceDirectory>target/generated-sources/annotations</sourceDirectory>
                     </sourceDirectories>
+                    <failOnViolation>true</failOnViolation>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
 </project>
-
-
